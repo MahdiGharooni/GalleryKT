@@ -1,4 +1,4 @@
-package ir.mahdi.gharooni.gallerykt.ui.theme
+package ir.mahdi.gharooni.gallerykt.utils.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

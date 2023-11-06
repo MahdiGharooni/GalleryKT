@@ -1,4 +1,4 @@
-package ir.mahdi.gharooni.gallerykt.ui.theme
+package ir.mahdi.gharooni.gallerykt.utils.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
