@@ -4,8 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ir.mahdi.gharooni.gallerykt.data.remote.dto.UrlDto
 import ir.mahdi.gharooni.gallerykt.data.remote.dto.UserDto
+import ir.mahdi.gharooni.gallerykt.utils.TABLE_NAME_IMAGES
 
-@Entity(tableName = "images")
+@Entity(tableName = TABLE_NAME_IMAGES)
 data class Image(
     @PrimaryKey(autoGenerate = false)
     val id: String,
