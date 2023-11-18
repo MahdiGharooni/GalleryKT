@@ -4,12 +4,14 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.mahdi.gharooni.gallerykt.domain.use_case.GetImagesUseCase
 import ir.mahdi.gharooni.gallerykt.presentation.state.GetImagesState
 import ir.mahdi.gharooni.gallerykt.utils.Response
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class GetImagesViewModel @Inject constructor(
     private val useCase: GetImagesUseCase
 ) : ViewModel() {
