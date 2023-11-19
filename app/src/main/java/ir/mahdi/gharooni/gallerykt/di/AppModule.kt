@@ -11,15 +11,14 @@ import ir.mahdi.gharooni.gallerykt.domain.use_case.GetImagesUseCase
 import ir.mahdi.gharooni.gallerykt.utils.BASE_URL
 import retrofit2.Retrofit
 import javax.inject.Singleton
-
-@InstallIn(SingletonComponent::class)
-
 @Module
+@InstallIn(SingletonComponent::class)
 class AppModule {
 
 
-    @Singleton
+
     @Provides
+    @Singleton
     fun provideAPI(): GalleryAPI {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -27,14 +26,16 @@ class AppModule {
             .create(GalleryAPI::class.java)
     }
 
-    @Singleton
+
     @Provides
+    @Singleton
     fun provideImagesRepository(api :GalleryAPI): GalleryRepository {
         return GalleryRepositoryImpl(api)
     }
 
-    @Singleton
+
     @Provides
+    @Singleton
     fun provideImagesUseCase(repository : GalleryRepository): GetImagesUseCase {
         return GetImagesUseCase(repository)
     }
