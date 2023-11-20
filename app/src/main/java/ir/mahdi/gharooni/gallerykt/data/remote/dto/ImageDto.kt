@@ -5,29 +5,30 @@ import ir.mahdi.gharooni.gallerykt.domain.model.Image
 
 data class ImageDto(
     @SerializedName("alt_description")
-    val altDescription: String,
+    val altDescription: String?,
     @SerializedName("blur_hash")
     val blurHash: String,
-    val breadcrumbs: List<Any>,
     val color: String,
     @SerializedName("created_at")
     val createdAt: String,
-    @SerializedName("current_user_collections")
-    val currentUserCollections: List<Any>,
-    val description: String,
+    val description: String?,
     val height: Int,
     val id: String,
     @SerializedName("liked_by_user")
     val likedByUser: Boolean,
     val likes: Int,
+    @SerializedName("links")
     val linkDto: LinkDto,
     @SerializedName("promoted_at")
-    val promotedAt: Any,
+    val promotedAt: String,
     val slug: String,
-    val sponsorshipDto: SponsorshipDto,
+    @SerializedName("sponsorship")
+    val sponsorshipDto: SponsorshipDto?,
     @SerializedName("updated_at")
     val updatedAt: String,
+    @SerializedName("urls")
     val urlDto: UrlDto,
+    @SerializedName("user")
     val userDto: UserDto,
     val width: Int
 )

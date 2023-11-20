@@ -6,7 +6,7 @@ data class SocialDto(
     @SerializedName("instagram_username")
     val instagramUsername: String,
     @SerializedName("paypal_email")
-    val paypalEmail: Any,
+    val paypalEmail: String?,
     @SerializedName("portfolio_url")
     val portfolioUrl: String,
     @SerializedName("twitter_username")

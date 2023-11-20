@@ -11,12 +11,11 @@ data class UserDto(
     val firstName: String,
     @SerializedName("for_hire")
     val forHire: Boolean,
-    @SerializedName("accepted_tos")
     val id: String,
     @SerializedName("instagram_username")
-    val instagramUsername: String,
+    val instagramUsername: String?,
     @SerializedName("last_name")
-    val lastName: Any,
+    val lastName: String?,
     val links: SponsorLinkDto,
     val location: String,
     val name: String,
@@ -44,7 +43,7 @@ fun UserDto.toUser(): User {
         acceptedTos = acceptedTos,
         bio = bio,
         firstName = firstName,
-        lastName = lastName,
+        lastName = lastName ?: "",
         name = name,
         profileImage = profileImage.toProfileImage(),
         username = username,

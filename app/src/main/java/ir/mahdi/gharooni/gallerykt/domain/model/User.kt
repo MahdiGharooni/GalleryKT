@@ -6,7 +6,7 @@ data class User(
     val acceptedTos: Boolean,
     val bio: String,
     val firstName: String,
-    val lastName: Any,
+    val lastName: String,
     val name: String,
     val profileImage: ProfileImage,
     val username: String

@@ -14,7 +14,8 @@ data class SponsorDto(
     @SerializedName("instagram_username")
     val instagramUsername: String,
     @SerializedName("last_name")
-    val lastName: Any,
+    val lastName: String?,
+    @SerializedName("links")
     val links: SponsorLinkDto,
     val location: String,
     val name: String,
@@ -22,6 +23,7 @@ data class SponsorDto(
     val portfolioUrl: String,
     @SerializedName("profile_image")
     val profileImage: ProfileImageDto,
+    @SerializedName("social")
     val socialDto: SocialDto,
     @SerializedName("total_collections")
     val totalCollections: Int,
@@ -30,7 +32,7 @@ data class SponsorDto(
     @SerializedName("total_photos")
     val totalPhotos: Int,
     @SerializedName("twitter_username")
-    val twitterUsername: String,
+    val twitterUsername: String?,
     @SerializedName("updated_at")
     val updatedAt: String,
     val username: String

@@ -10,10 +10,10 @@ import ir.mahdi.gharooni.gallerykt.utils.TABLE_NAME_IMAGES
 data class Image(
     @PrimaryKey(autoGenerate = false)
     val id: String,
-    val altDescription: String,
+    val altDescription: String?,
     val color: String,
     val createdAt: String,
-    val description: String,
+    val description: String?,
     val likes: Int,
     val link: Link,
     val slug: String,
