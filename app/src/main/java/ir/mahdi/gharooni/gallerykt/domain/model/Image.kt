@@ -18,6 +18,6 @@ data class Image(
     val link: Link,
     val slug: String,
     val urlDto: UrlDto,
-    val userDto: UserDto,
+    val user: UserDto,
     val url: Url,
 )

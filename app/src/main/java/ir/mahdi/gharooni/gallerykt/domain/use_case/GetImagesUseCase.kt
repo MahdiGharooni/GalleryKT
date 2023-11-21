@@ -12,7 +12,7 @@ class GetImagesUseCase @Inject constructor(
     suspend operator fun invoke() : Flow<Response<List<Image>>> {
         return repository.getImages()
     }
-    //todo: test both
+
     suspend fun getImages() : Flow<Response<List<Image>>> {
         return repository.getImages()
     }
