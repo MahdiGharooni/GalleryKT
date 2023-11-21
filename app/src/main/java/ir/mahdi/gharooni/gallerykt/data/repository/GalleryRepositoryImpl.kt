@@ -4,6 +4,8 @@ import ir.mahdi.gharooni.gallerykt.data.remote.GalleryAPI
 import ir.mahdi.gharooni.gallerykt.data.remote.dto.toImage
 import ir.mahdi.gharooni.gallerykt.domain.model.Image
 import ir.mahdi.gharooni.gallerykt.domain.repository.GalleryRepository
+import ir.mahdi.gharooni.gallerykt.utils.ORIENTATION
+import ir.mahdi.gharooni.gallerykt.utils.PER_PAGE
 import ir.mahdi.gharooni.gallerykt.utils.Response
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -16,15 +18,17 @@ class GalleryRepositoryImpl @Inject constructor(
     override suspend fun getImages() = flow {
         emit(Response.Loading<List<Image>>())
         try {
-            val images: List<Image> = api.getAllImages().map {
+            val images: List<Image> = api.getAllImages(PER_PAGE, ORIENTATION).map {
                 it.toImage()
             }
 
             emit(Response.Success(images))
         } catch (e: IOException) {
-            emit(Response.Error("IOException"))
+            emit(Response.Error("Network Connection Problem"))
         } catch (e: HttpException) {
-            emit(Response.Error("HttpException"))
+            emit(Response.Error("HTTP Response Problem"))
+        } catch (e: Exception) {
+            emit(Response.Error(e.message ?: "An Error Occurred"))
         }
 
     }
