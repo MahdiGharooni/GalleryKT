@@ -9,19 +9,22 @@ import ir.mahdi.gharooni.gallerykt.data.repository.GalleryRepositoryImpl
 import ir.mahdi.gharooni.gallerykt.domain.repository.GalleryRepository
 import ir.mahdi.gharooni.gallerykt.domain.use_case.GetImagesUseCase
 import ir.mahdi.gharooni.gallerykt.utils.BASE_URL
+import kotlinx.serialization.ExperimentalSerializationApi
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
+@ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
-
-
+object AppModule {
 
     @Provides
     @Singleton
     fun provideAPI(): GalleryAPI {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GalleryAPI::class.java)
     }
@@ -29,14 +32,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideImagesRepository(api :GalleryAPI): GalleryRepository {
+    fun provideImagesRepository(api: GalleryAPI): GalleryRepository {
         return GalleryRepositoryImpl(api)
     }
 
 
     @Provides
     @Singleton
-    fun provideImagesUseCase(repository : GalleryRepository): GetImagesUseCase {
+    fun provideImagesUseCase(repository: GalleryRepository): GetImagesUseCase {
         return GetImagesUseCase(repository)
     }
 }
