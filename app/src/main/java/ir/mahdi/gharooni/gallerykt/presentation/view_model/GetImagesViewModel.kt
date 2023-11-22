@@ -15,14 +15,12 @@ import javax.inject.Inject
 class GetImagesViewModel @Inject constructor(
     private val useCase: GetImagesUseCase
 ) : ViewModel() {
+    private val _state = mutableStateOf(GetImagesState())
+    val state: State<GetImagesState> = _state
 
     init {
         getImages()
     }
-
-
-    private val _state = mutableStateOf(GetImagesState())
-    val state: State<GetImagesState> = _state
 
 
     private fun getImages() {
@@ -45,7 +43,7 @@ class GetImagesViewModel @Inject constructor(
                     is Response.Success<*> -> {
                         _state.value = GetImagesState(
                             isLoading = false,
-                            image = it.data ?: emptyList()
+                            images = it.data ?: emptyList()
                         )
                     }
 
