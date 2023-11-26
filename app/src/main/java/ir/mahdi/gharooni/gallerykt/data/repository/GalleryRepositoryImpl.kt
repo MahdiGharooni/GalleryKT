@@ -15,10 +15,10 @@ import javax.inject.Inject
 class GalleryRepositoryImpl @Inject constructor(
     private val api: GalleryAPI
 ) : GalleryRepository {
-    override suspend fun getImages() = flow {
+    override suspend fun getImages(page: Int) = flow {
         emit(Response.Loading<List<Image>>())
         try {
-            val images: List<Image> = api.getAllImages(PER_PAGE, ORIENTATION).map {
+            val images: List<Image> = api.getAllImages(page * PER_PAGE, ORIENTATION).map {
                 it.toImage()
             }
 

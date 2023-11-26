@@ -9,11 +9,8 @@ import javax.inject.Inject
 class GetImagesUseCase @Inject constructor(
     private val repository: GalleryRepository
 ) {
-    suspend operator fun invoke() : Flow<Response<List<Image>>> {
-        return repository.getImages()
+    suspend operator fun invoke(page: Int): Flow<Response<List<Image>>> {
+        return repository.getImages(page)
     }
 
-    suspend fun getImages() : Flow<Response<List<Image>>> {
-        return repository.getImages()
-    }
 }
