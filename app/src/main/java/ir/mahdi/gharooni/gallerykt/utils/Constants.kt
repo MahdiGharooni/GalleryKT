@@ -4,6 +4,7 @@ const val BASE_URL = "https://api.unsplash.com/"
 const val TOKEN = "Client-ID BY2FKdr2PEn0HlBjDtYJp-TfUUwVa5KxOC5x_2KS5do"
 
 // tables
+const val DATABASE_NAME = "gallery_db"
 const val TABLE_NAME_IMAGES = "images"
 
 
