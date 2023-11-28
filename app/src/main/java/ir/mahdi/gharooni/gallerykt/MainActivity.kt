@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -39,19 +41,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             GalleryKTTheme {
                 val viewModel = viewModel<GetImagesViewModel>()
-                val state: State<GetImagesState> = viewModel.state
+                val state: State<GetImagesState> = remember { viewModel.state }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    if (state.value.isLoading) {
+                    if (state.value.initialLoading) {
                         LoadingView()
-                    } else if (state.value.images.isEmpty()) {
-                        ErrorText(state.value.message)
-                    } else {
-                        ImagesList(state.value.images)
-                    }
+                    } else
+                        if (state.value.images.isEmpty()) {
+                            ErrorText(state.value.message)
+                        } else {
+                            ImagesList(state.value, viewModel)
+                        }
                 }
             }
         }
@@ -92,7 +95,8 @@ fun ErrorText(message: String) {
 }
 
 @Composable
-fun ImagesList(images: List<Image>) {
+fun ImagesList(state: GetImagesState, viewModel: GetImagesViewModel) {
+    val images = state.images
     LazyColumn(
         modifier = Modifier
             .height(200.dp)
@@ -100,6 +104,9 @@ fun ImagesList(images: List<Image>) {
             .padding(horizontal = 24.dp)
     ) {
         items(images.size) {
+            if (it >= (images.size - 1) && !state.endReached && !state.isLoading) {
+                viewModel.loadNextItems()
+            }
             if (it == 0) {
                 Spacer(modifier = Modifier.height(24.dp))
             }
@@ -108,7 +115,18 @@ fun ImagesList(images: List<Image>) {
                 Spacer(modifier = Modifier.height(24.dp))
             }
         }
-
+        item {
+            if (state.isLoading) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+        }
     }
 
 
