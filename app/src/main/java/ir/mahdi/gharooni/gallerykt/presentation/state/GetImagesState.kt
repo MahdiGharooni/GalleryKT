@@ -2,8 +2,11 @@ package ir.mahdi.gharooni.gallerykt.presentation.state
 
 import ir.mahdi.gharooni.gallerykt.domain.model.Image
 
-class GetImagesState(
-     val isLoading: Boolean = false,
-     val images: List<Image> = emptyList(),
-     val message: String = "",
+data class GetImagesState(
+     var initialLoading: Boolean = false,
+     var isLoading: Boolean = false,
+     var images: List<Image> = emptyList(),
+     var message: String = "",
+     var endReached: Boolean = false,
+     var page: Int = 1
 )

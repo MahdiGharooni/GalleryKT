@@ -24,8 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ir.mahdi.gharooni.gallerykt.R
 import ir.mahdi.gharooni.gallerykt.domain.model.Image as galleryImage
 
 @Composable
@@ -44,6 +46,8 @@ fun ImageCard(image: galleryImage) {
                 contentDescription = image.description,
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.FillWidth,
+                placeholder = painterResource(R.drawable.placeholder),
+                error = painterResource(R.drawable.placeholder),
             )
             Footer(image)
         }
