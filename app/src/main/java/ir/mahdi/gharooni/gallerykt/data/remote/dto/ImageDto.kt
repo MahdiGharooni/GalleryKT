@@ -43,8 +43,7 @@ fun ImageDto.toImage(): Image {
         likes = likes,
         link = linkDto.toLink(),
         slug = slug,
-        urlDto = urlDto,
-        user = userDto,
+        user = userDto.toUser(),
         url = urlDto.toUrl(),
     )
 }
