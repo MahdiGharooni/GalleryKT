@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface GalleryRepository {
 
     suspend fun getImages(page: Int): Flow<Response<List<Image>>>
+    suspend fun search(page: Int, query: String): Flow<Response<List<Image>>>
 }
