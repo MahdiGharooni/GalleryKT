@@ -1,5 +1,6 @@
 package ir.mahdi.gharooni.gallerykt.presentation.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -20,18 +21,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import ir.mahdi.gharooni.gallerykt.R
+import ir.mahdi.gharooni.gallerykt.presentation.view_model.FavoriteViewModel
 import ir.mahdi.gharooni.gallerykt.domain.model.Image as galleryImage
 
 @Composable
-fun ImageCard(image: galleryImage) {
+fun ImageCard(image: galleryImage, favViewModel: FavoriteViewModel = hiltViewModel()) {
+
+
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -49,13 +56,15 @@ fun ImageCard(image: galleryImage) {
                 placeholder = painterResource(R.drawable.placeholder),
                 error = painterResource(R.drawable.placeholder),
             )
-            Footer(image)
+            Footer(image, favViewModel)
         }
     }
 }
 
 @Composable
-fun Footer(image: galleryImage) {
+fun Footer(image: galleryImage, favViewModel: FavoriteViewModel) {
+    val state by favViewModel.state. collectAsState()
+   val isFav :Boolean =  state.images.contains(image)
     Surface(
         modifier = Modifier
             .offset(x = 0.dp, y = 160.dp)
@@ -84,10 +93,24 @@ fun Footer(image: galleryImage) {
                 Icon(
                     Icons.Filled.Favorite,
                     contentDescription = "",
-                    tint = Color.Red,
+                    tint = if (isFav) {
+                        Color.Red
+                    } else {
+                        Color.White
+                    },
+                    modifier = Modifier.clickable {
+                        if (isFav) {
+                            favViewModel.deleteFavoriteImage(image)
+                        } else {
+                            favViewModel. insertFavoriteImage(image)
+                        }
+                    }
                 )
+
 
             }
         }
     }
+
+
 }

@@ -1,5 +1,6 @@
 package ir.mahdi.gharooni.gallerykt.domain.model
 
+import ir.mahdi.gharooni.gallerykt.data.local.entity.FavoriteImageEntity
 import ir.mahdi.gharooni.gallerykt.data.local.entity.ImageEntity
 
 data class Image(
@@ -13,6 +14,7 @@ data class Image(
     val slug: String? = null,
     val user: User,
     val url: Url,
+//    var isFavorite:Boolean = false,
 )
 
 
@@ -24,6 +26,15 @@ fun Image.toImageEntity(page: Int): ImageEntity {
         likes = likes,
         user = user,
         url = url,
+        )
+}
 
+fun Image.toFavoriteImageEntity(): FavoriteImageEntity {
+    return FavoriteImageEntity(
+        id = id,
+        description = description,
+        likes = likes,
+        user = user,
+        url = url,
         )
 }
