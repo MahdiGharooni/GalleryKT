@@ -82,7 +82,10 @@ fun Footer(image: galleryImage, favViewModel: FavoriteViewModel) {
                     contentDescription = image.user.name,
                     modifier = Modifier
                         .size(21.dp)
-                        .clip(CircleShape)
+                        .clip(CircleShape),
+                    contentScale = ContentScale.FillWidth,
+                    placeholder = painterResource(R.drawable.person),
+                    error = painterResource(R.drawable.person),
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = image.user.name)
