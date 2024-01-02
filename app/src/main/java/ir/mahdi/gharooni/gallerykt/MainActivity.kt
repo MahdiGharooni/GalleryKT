@@ -69,7 +69,6 @@ class MainActivity : ComponentActivity() {
                 val favViewModel : FavoriteViewModel= hiltViewModel()
 
 
-                println("setContentttttt")
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
